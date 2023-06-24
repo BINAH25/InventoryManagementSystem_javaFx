@@ -1,16 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.inventorymanagemensystem.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="338.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventorymanagemensystem.HelloController">
+   <children>
+      <AnchorPane fx:id="login_form" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane layoutX="10.0" layoutY="5.0" prefHeight="549.0" prefWidth="319.0" styleClass="white-bg" stylesheets="@style.css">
+               <children>
+                  <FontAwesomeIcon fill="#16a47c" glyphName="USER" layoutX="131.0" layoutY="98.0" size="5em" text="" />
+                  <Label layoutX="75.0" layoutY="120.0" text="USER LOGIN FORM" textFill="#0d6b4a">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="si_username" layoutX="40.0" layoutY="185.0" prefHeight="35.0" prefWidth="240.0" promptText="Username" styleClass="textfield" stylesheets="@style.css" />
+                  <PasswordField fx:id="si_password" layoutX="40.0" layoutY="246.0" prefHeight="35.0" prefWidth="240.0" promptText="Password" styleClass="textfield" stylesheets="@style.css" />
+                  <Button fx:id="login" layoutX="41.0" layoutY="313.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="240.0" styleClass="btn" stylesheets="@style.css" text="Login">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="99.0" layoutY="446.0" text="Don't have an acount" />
+                  <Button fx:id="create_account" layoutX="41.0" layoutY="482.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="240.0" styleClass="btn" stylesheets="@style.css" text="Create account">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="registration_form" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane layoutX="10.0" layoutY="5.0" prefHeight="549.0" prefWidth="319.0" styleClass="white-bg" stylesheets="@style.css">
+               <children>
+                  <Label layoutX="39.0" layoutY="110.0" text="USER REGISTRATION FORM" textFill="#0d6b4a">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="su_email" layoutX="40.0" layoutY="164.0" prefHeight="35.0" prefWidth="240.0" promptText="Email Address" styleClass="textfield" stylesheets="@style.css" />
+                  <PasswordField fx:id="su_password" layoutX="40.0" layoutY="264.0" prefHeight="35.0" prefWidth="240.0" promptText="Password" styleClass="textfield" stylesheets="@style.css" />
+                  <Button fx:id="register" layoutX="41.0" layoutY="381.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="240.0" styleClass="btn" stylesheets="@style.css" text="Register">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="99.0" layoutY="446.0" text="Already have an account?" />
+                  <Button fx:id="su_login" layoutX="41.0" layoutY="482.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="240.0" styleClass="btn" stylesheets="@style.css" text="Sign In">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <FontAwesomeIcon fill="#16a47c" glyphName="USER_PLUS" layoutX="129.0" layoutY="93.0" size="5em" text="" />
+                  <PasswordField fx:id="su_confirm_password" layoutX="40.0" layoutY="316.0" prefHeight="35.0" prefWidth="240.0" promptText="Confirm Password" styleClass="textfield" stylesheets="@style.css" />
+                  <TextField fx:id="su_username" layoutX="40.0" layoutY="214.0" prefHeight="35.0" prefWidth="240.0" promptText="Username" styleClass="textfield" stylesheets="@style.css" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

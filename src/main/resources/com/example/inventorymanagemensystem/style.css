@@ -1,0 +1,17 @@
+.white-bg{
+-fx-background-color: #fff;
+}
+.btn{
+-fx-background-color: linear-gradient(to bottom right,#16a47c,#2a827b);
+-fx-cursor: hand;
+-fx-text-fill: #fff;
+-fx-font-family: arial;
+}
+.textfield{
+-fx-border-color: #000;
+-fx-border-width: .5px;
+}
+.textfield:focused{
+-fx-border-color: linear-gradient(to bottom right,#16a47c,#2a827b);
+-fx-border-width: .8px;
+}
