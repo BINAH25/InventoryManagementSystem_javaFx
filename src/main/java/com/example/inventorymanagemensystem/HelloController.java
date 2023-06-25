@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Objects;
 
 public class HelloController {
     @FXML
@@ -95,6 +96,50 @@ public class HelloController {
                     alert.setContentText("Incorrect Credentials");
                     alert.showAndWait();
                 }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void register(){
+        connect = Database.connect();
+        try {
+            if(su_email.getText().isEmpty()|| su_username.getText().isEmpty()
+            || su_password.getText().isEmpty()||su_confirm_password.getText().isEmpty()){
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please fill all blank fields");
+                alert.showAndWait();
+            } else if (!Objects.equals(su_password.getText(), su_confirm_password.getText())) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Password Mismatch ");
+                alert.showAndWait();
+            }else{
+
+                String insertData = "INSERT INTO admin (email,username,password) VALUES (?,?,?)";
+                prepare = connect.prepareStatement(insertData);
+                prepare.setString(1, su_email.getText());
+                prepare.setString(2,su_username.getText());
+                prepare.setString(3,su_password.getText());
+
+                prepare.executeUpdate();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("User Created Successfully");
+                alert.showAndWait();
+                su_email.setText("");
+                su_password.setText("");
+                su_confirm_password.setText("");
+                su_username.setText("");
+                registration_form.setVisible(false);
+                login_form.setVisible(true);
+
             }
 
         }catch (Exception e){
