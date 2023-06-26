@@ -1,9 +1,13 @@
 package com.example.inventorymanagemensystem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -89,6 +93,14 @@ public class HelloController {
                     alert.showAndWait();
                     si_email.setText("");
                     si_password.setText("");
+                    // TO HIDE THE LOGIN FORM
+                    login.getScene().getWindow().hide();
+                    // REDIRECT TO DASHBOARD
+                    Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
                 }else{
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error Message");
@@ -139,6 +151,8 @@ public class HelloController {
                 su_username.setText("");
                 registration_form.setVisible(false);
                 login_form.setVisible(true);
+
+
 
             }
 
