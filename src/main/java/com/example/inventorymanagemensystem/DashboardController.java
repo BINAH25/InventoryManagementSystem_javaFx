@@ -18,6 +18,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -114,6 +118,11 @@ public class DashboardController implements Initializable {
     @FXML
     private TableView<?> tableView1;
 
+    // IMPORTING SQL TOOLS
+    private Connection connect;
+    private PreparedStatement prepare;
+    private ResultSet result;
+    private Statement statement;
 
     // CREATING A LIST FOR CATEGORY LIST
     private String[] categoryList = {
@@ -199,6 +208,33 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
 
+    }
+
+    // GETTING ALL PRODUCTS FROM THE DATABASE
+    public ObservableList<Product> getAllProducts(){
+        ObservableList<Product> productList = FXCollections.observableArrayList();
+        String getProducts = "SELECT * FROM product";
+        try {
+            connect = Database.connect();
+            prepare = connect.prepareStatement(getProducts);
+            result = prepare.executeQuery();
+            Product produts;
+
+            while (result.next()){
+                produts = new Product(
+                        result.getInt("product_id"),
+                        result.getString("category"),
+                        result.getString("product_name"),
+                        result.getDouble("price"),
+                        result.getDate("date")
+                );
+                productList.add(produts);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  productList;
     }
 
     @Override
