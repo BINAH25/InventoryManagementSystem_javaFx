@@ -2,14 +2,20 @@ package com.example.inventorymanagemensystem;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,6 +29,12 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Button add_product_btn;
+
+    @FXML
+    private Button add_product_btn1;
+
+    @FXML
+    private Button add_product_btn11;
 
     @FXML
     private ComboBox<?> category;
@@ -43,13 +55,46 @@ public class DashboardController implements Initializable {
     private Button home_btn;
 
     @FXML
+    private Button home_btn1;
+
+    @FXML
+    private Button home_btn11;
+
+    @FXML
     private FontAwesomeIcon logout_btn;
+
+    @FXML
+    private FontAwesomeIcon logout_btn1;
+
+    @FXML
+    private FontAwesomeIcon logout_btn11;
+
+    @FXML
+    private AnchorPane main_form;
 
     @FXML
     private Label name;
 
     @FXML
+    private Label name1;
+
+    @FXML
+    private Label name11;
+
+    @FXML
     private Button order_btn;
+
+    @FXML
+    private Button order_btn1;
+
+    @FXML
+    private Button order_btn11;
+
+    @FXML
+    private AnchorPane order_form;
+
+    @FXML
+    private AnchorPane product_fom;
 
     @FXML
     private TextField product_id;
@@ -67,10 +112,10 @@ public class DashboardController implements Initializable {
     private TextField search;
 
     @FXML
-    private TableView<?> tableView;
+    private TableView<?> tableView1;
 
 
-
+    // CREATING A LIST FOR CATEGORY LIST
     private String[] categoryList = {
             "Beverages",
             "Bread/Bakery",
@@ -84,7 +129,7 @@ public class DashboardController implements Initializable {
             "Paper Goods",
             "Home Care"
     };
-
+    // METHOD TO FILL THE COMBO WITH CATEGORY LIST
     public  void productCategoryList(){
         List<String> CategoryList = new ArrayList<>();
         for(String data:categoryList ){
@@ -94,6 +139,67 @@ public class DashboardController implements Initializable {
         category.setItems(listData);
     }
 
+    public void SwitchForm(ActionEvent event){
+        if(event.getSource() == home_btn){
+            main_form.setVisible(true);
+            product_fom.setVisible(false);
+            order_form.setVisible(false);
+        } else if (event.getSource() == add_product_btn) {
+            main_form.setVisible(false);
+            product_fom.setVisible(true);
+            order_form.setVisible(false);
+        } else if (event.getSource() == order_btn) {
+            main_form.setVisible(false);
+            product_fom.setVisible(false);
+            order_form.setVisible(true);
+        } else if (event.getSource() == home_btn1) {
+            main_form.setVisible(true);
+            product_fom.setVisible(false);
+            order_form.setVisible(false);
+        } else if (event.getSource() == add_product_btn1) {
+            main_form.setVisible(false);
+            product_fom.setVisible(true);
+            order_form.setVisible(false);
+        } else if (event.getSource()== order_btn1) {
+            main_form.setVisible(false);
+            product_fom.setVisible(false);
+            order_form.setVisible(true);
+        } else if (event.getSource() == home_btn11) {
+            main_form.setVisible(true);
+            product_fom.setVisible(false);
+            order_form.setVisible(false);
+        } else if (event.getSource() == add_product_btn11) {
+            main_form.setVisible(false);
+            product_fom.setVisible(true);
+            order_form.setVisible(false);
+        } else if (event.getSource() == order_btn11) {
+            main_form.setVisible(false);
+            product_fom.setVisible(false);
+            order_form.setVisible(true);
+        }
+    }
+
+    public void logout(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            home_btn.getScene().getWindow().hide();
+            add_product_btn.getScene().getWindow().hide();
+            order_btn.getScene().getWindow().hide();
+            home_btn1.getScene().getWindow().hide();
+            add_product_btn1.getScene().getWindow().hide();
+            order_btn1.getScene().getWindow().hide();
+            home_btn11.getScene().getWindow().hide();
+            add_product_btn11.getScene().getWindow().hide();
+            order_btn11.getScene().getWindow().hide();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
