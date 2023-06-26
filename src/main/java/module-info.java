@@ -10,6 +10,7 @@ module com.example.inventorymanagemensystem {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires fontawesomefx;
 
     opens com.example.inventorymanagemensystem to javafx.fxml;
     exports com.example.inventorymanagemensystem;
