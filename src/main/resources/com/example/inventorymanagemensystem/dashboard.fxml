@@ -21,7 +21,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventorymanagemensystem.DashboardController">
    <children>
-      <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0" visible="false">
          <children>
             <BorderPane layoutX="237.0" layoutY="152.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -178,7 +178,7 @@
             </BorderPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="product_fom" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+      <AnchorPane fx:id="product_fom" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane layoutX="237.0" layoutY="152.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -260,8 +260,8 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="product_name" layoutX="15.0" layoutY="251.0" prefHeight="35.0" prefWidth="230.0" promptText="Enter Good name" />
-                                    <Button fx:id="add_good_btn" layoutX="15.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="230.0" text="ADD GOOD" />
-                                    <Button fx:id="remove_good_btn" layoutX="15.0" layoutY="465.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="230.0" text="REMOVE GOOD" />
+                                    <Button fx:id="add_good_btn" layoutX="15.0" layoutY="408.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="230.0" styleClass="nav" stylesheets="@dashboard.css" text="ADD GOOD" textFill="WHITE" />
+                                    <Button fx:id="remove_good_btn" layoutX="15.0" layoutY="465.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="230.0" styleClass="nav" stylesheets="@dashboard.css" text="REMOVE GOOD" textFill="WHITE" />
                                     <Label layoutX="16.0" layoutY="300.0" prefHeight="34.0" prefWidth="222.0" text="GOOD PRICE">
                                        <font>
                                           <Font name="Arial Bold" size="13.0" />
@@ -284,8 +284,8 @@
                                           <TableColumn fx:id="column4" prefWidth="115.0" text="GOOD PRICE" />
                                        </columns>
                                     </TableView>
-                                    <TextField fx:id="search" layoutX="15.0" layoutY="16.0" prefHeight="34.0" prefWidth="257.0" promptText="Search" />
-                                    <FontAwesomeIcon glyphName="SEARCH" layoutX="28.0" layoutY="38.0" size="1.5em" />
+                                    <TextField fx:id="search" layoutX="15.0" layoutY="16.0" prefHeight="34.0" prefWidth="257.0" promptText="Search" styleClass="search" stylesheets="@dashboard.css" />
+                                    <FontAwesomeIcon glyphName="SEARCH" layoutX="20.0" layoutY="38.0" size="1.5em" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -396,8 +396,8 @@
                                           <Font name="Arial Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Button layoutX="23.0" layoutY="447.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Pay" />
-                                    <Button layoutX="181.0" layoutY="447.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Receipt" />
+                                    <Button layoutX="23.0" layoutY="447.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="nav" stylesheets="@dashboard.css" text="Pay" textFill="WHITE" />
+                                    <Button layoutX="181.0" layoutY="447.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="add-btn" stylesheets="@dashboard.css" text="Receipt" />
                                  </children>
                               </AnchorPane>
                            </children>
