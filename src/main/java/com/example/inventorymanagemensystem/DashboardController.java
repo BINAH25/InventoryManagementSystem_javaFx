@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -44,16 +45,16 @@ public class DashboardController implements Initializable {
     private ComboBox<?> category;
 
     @FXML
-    private TableColumn<?, ?> column1;
+    private TableColumn<Product, String> column1;
 
     @FXML
-    private TableColumn<?, ?> column2;
+    private TableColumn<Product, String> column2;
 
     @FXML
-    private TableColumn<?, ?> column3;
+    private TableColumn<Product, String> column3;
 
     @FXML
-    private TableColumn<?, ?> column4;
+    private TableColumn<Product, String> column4;
 
     @FXML
     private Button home_btn;
@@ -116,7 +117,7 @@ public class DashboardController implements Initializable {
     private TextField search;
 
     @FXML
-    private TableView<?> tableView1;
+    private TableView<Product> tableView1;
 
     // IMPORTING SQL TOOLS
     private Connection connect;
@@ -147,7 +148,7 @@ public class DashboardController implements Initializable {
         ObservableList listData = FXCollections.observableArrayList(CategoryList);
         category.setItems(listData);
     }
-
+// SWITCH FORM METHOD
     public void SwitchForm(ActionEvent event){
         if(event.getSource() == home_btn){
             main_form.setVisible(true);
@@ -187,7 +188,7 @@ public class DashboardController implements Initializable {
             order_form.setVisible(true);
         }
     }
-
+// LOGOUT METHOD
     public void logout(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
@@ -235,6 +236,16 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
         return  productList;
+    }
+
+    private ObservableList<Product> ProductLists;
+    public void showAllProducts(){
+        ProductLists = getAllProducts();
+        column1.setCellValueFactory(new PropertyValueFactory<>("product_id"));
+        column2.setCellValueFactory(new PropertyValueFactory<>("category"));
+        column3.setCellValueFactory(new PropertyValueFactory<>("product_name"));
+        column4.setCellValueFactory(new PropertyValueFactory<>("price"));
+        tableView1.setItems(ProductLists);
     }
 
     @Override
