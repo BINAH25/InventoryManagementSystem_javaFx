@@ -8,12 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -24,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -45,7 +41,7 @@ public class DashboardController implements Initializable {
     private ComboBox<?> category;
 
     @FXML
-    private TableColumn<Product, String> column1;
+    private TableColumn<Product, Integer> column1;
 
     @FXML
     private TableColumn<Product, String> column2;
@@ -118,6 +114,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private TableView<Product> tableView1;
+    Alert alert;
 
     // IMPORTING SQL TOOLS
     private Connection connect;
@@ -158,6 +155,8 @@ public class DashboardController implements Initializable {
             main_form.setVisible(false);
             product_fom.setVisible(true);
             order_form.setVisible(false);
+            showAllProducts();
+
         } else if (event.getSource() == order_btn) {
             main_form.setVisible(false);
             product_fom.setVisible(false);
@@ -170,6 +169,8 @@ public class DashboardController implements Initializable {
             main_form.setVisible(false);
             product_fom.setVisible(true);
             order_form.setVisible(false);
+            showAllProducts();
+
         } else if (event.getSource()== order_btn1) {
             main_form.setVisible(false);
             product_fom.setVisible(false);
@@ -182,6 +183,8 @@ public class DashboardController implements Initializable {
             main_form.setVisible(false);
             product_fom.setVisible(true);
             order_form.setVisible(false);
+            showAllProducts();
+
         } else if (event.getSource() == order_btn11) {
             main_form.setVisible(false);
             product_fom.setVisible(false);
@@ -209,6 +212,53 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
 
+    }
+
+    // ADD PRODUCT METHOD
+    public void addProduct(){
+        String sql = "INSERT INTO product (product_id,category,product_name,price,date) VALUES (?,?,?,?,?)";
+        try {
+            if(product_id.getText().isEmpty()|| category.getSelectionModel().getSelectedItem() == null
+                    || product_name.getText().isEmpty()||product_price.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please fill all blank fields");
+                alert.showAndWait();
+            }else {
+                connect = Database.connect();
+                prepare = connect.prepareStatement(sql);
+                prepare.setString(1,product_id.getText());
+                prepare.setString(2,(String) category.getSelectionModel().getSelectedItem());
+                prepare.setString(3,product_name.getText());
+                prepare.setString(4,product_price.getText());
+
+                Date date  = new Date();
+                java.sql.Date sqldate = new java.sql.Date(date.getTime());
+                prepare.setString(5,String.valueOf(sqldate));
+                prepare.executeUpdate();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("New Created Successfully");
+                alert.showAndWait();
+                // CLEAR THE PRODUCT FORM
+                clearform();
+                // SHOW THE PRODUCT ADDED IN THE TABLEVIEW
+                showAllProducts();
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // METHOD TO CLEAR THE PRODUCT FORM
+    public void clearform(){
+        product_id.setText("");
+        product_price.setText("");
+        product_name.setText("");
+        category.getSelectionModel().clearSelection();
     }
 
     // GETTING ALL PRODUCTS FROM THE DATABASE
@@ -251,5 +301,6 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         productCategoryList();
+        showAllProducts();
     }
 }
