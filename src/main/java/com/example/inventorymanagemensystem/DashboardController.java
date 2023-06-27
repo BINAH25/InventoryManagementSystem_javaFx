@@ -298,6 +298,16 @@ public class DashboardController implements Initializable {
         tableView1.setItems(ProductLists);
     }
 
+    public void selectStudentdata(){
+        Product product = tableView1.getSelectionModel().getSelectedItem();
+        int num = tableView1.getSelectionModel().getSelectedIndex();
+
+        if((num - 1) < -1) return;
+        product_id.setText(String.valueOf(product.getProductId()));
+        product_name.setText(String.valueOf(product.getProduct_name()));
+        product_price.setText(String.valueOf(product.getPrice()));
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         productCategoryList();
