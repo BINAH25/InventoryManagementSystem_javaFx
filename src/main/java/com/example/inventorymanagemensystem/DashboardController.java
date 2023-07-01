@@ -376,13 +376,34 @@ public class DashboardController implements Initializable {
         product_name.setText(String.valueOf(product.getProduct_name()));
         product_price.setText(String.valueOf(product.getPrice()));
     }
-
+// ISSUE GOODS METHODS
     public ObservableList<CustomerData> issueDataList (){
         customerId();
         ObservableList<CustomerData> listData = FXCollections.observableArrayList();
         String sql = "SELECT * FROM customer WHERE customer_id = '"+customer_id+"'";
-        return null;
+        connect = Database.connect();
+        try {
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+            CustomerData customers;
+
+            while (result.next()){
+                customers = new CustomerData(
+                        result.getInt("customer_id"),
+                        result.getInt("quantity"),
+                        result.getDouble("price"),
+                        result.getString("type"),
+                        result.getString("product_name"),
+                        result.getDate("date")
+                );
+                listData.add(customers);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listData;
     }
+    // CHECK CUSTOMER ID METHOD 
 
     private  int customer_id;
 
