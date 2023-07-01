@@ -152,8 +152,6 @@ public class HelloController {
                 registration_form.setVisible(false);
                 login_form.setVisible(true);
 
-
-
             }
 
         }catch (Exception e){
