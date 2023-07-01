@@ -571,8 +571,29 @@ public class DashboardController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("Good Issued Successfully");
                 alert.showAndWait();
+                diaplayTotalPrice();
+                showAllIssuedGoods();
             }
 
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private double total_price;
+    public void diaplayTotalPrice(){
+        customerId();
+        String sql  = "SELECT SUM(price) FROM customer WHERE customer_id = '" +customer_id+"'";
+        connect = Database.connect();
+        try {
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            while (result.next()){
+                total_price = result.getDouble("SUM(price)");
+            }
+            total.setText(String.valueOf(total_price));
 
         }catch (Exception e){
             e.printStackTrace();
