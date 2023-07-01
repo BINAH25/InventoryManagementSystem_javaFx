@@ -356,7 +356,7 @@ public class DashboardController implements Initializable {
         }
         return  productList;
     }
-
+// MAP EACH PRODUCT TO IT RESPECTIVE COLUMN
     private ObservableList<Product> ProductLists;
     public void showAllProducts(){
         ProductLists = getAllProducts();
@@ -366,7 +366,7 @@ public class DashboardController implements Initializable {
         column4.setCellValueFactory(new PropertyValueFactory<>("price"));
         tableView1.setItems(ProductLists);
     }
-
+//  POPULATE THE PRODUCT FORM WITH SELECT PRODUCT
     public void selectStudentdata(){
         Product product = tableView1.getSelectionModel().getSelectedItem();
         int num = tableView1.getSelectionModel().getSelectedIndex();
@@ -377,7 +377,45 @@ public class DashboardController implements Initializable {
         product_price.setText(String.valueOf(product.getPrice()));
     }
 
+    public ObservableList<CustomerData> issueDataList (){
+        customerId();
+        ObservableList<CustomerData> listData = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM customer WHERE customer_id = '"+customer_id+"'";
+        return null;
+    }
 
+    private  int customer_id;
+
+    public void customerId(){
+        String sql = "SELECT * FROM customer";
+        int checkId = 0;
+
+        try {
+            connect = Database.connect();
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            while (result.next()){
+                customer_id = result.getInt("customer_id");
+            }
+            String checkData = "SELECT * FROM customer_receipt";
+            statement = connect.createStatement();
+            result = statement.executeQuery(checkData);
+
+            while (result.next()){
+                checkId = result.getInt("customer_id");
+            }
+
+            if(customer_id == 0){
+                customer_id += 1;
+            } else if (checkId == customer_id) {
+                customer_id += 1;
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
