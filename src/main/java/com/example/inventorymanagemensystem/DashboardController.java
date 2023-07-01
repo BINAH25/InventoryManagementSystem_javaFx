@@ -12,16 +12,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.control.Spinner;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class DashboardController implements Initializable {
 
@@ -114,6 +112,40 @@ public class DashboardController implements Initializable {
 
     @FXML
     private TableView<Product> tableView1;
+    @FXML
+    private TableView<?> tableView2;
+
+    @FXML
+    private Label total;
+
+    @FXML
+    private Button receipt_btn;
+    @FXML
+    private Button pay_btn;
+    @FXML
+    private TableColumn<?, ?> order_col_category;
+
+    @FXML
+    private TableColumn<?, ?> order_col_name;
+
+    @FXML
+    private TableColumn<?, ?> order_col_price;
+
+    @FXML
+    private TableColumn<?, ?> order_col_quantity;
+    @FXML
+    private ComboBox<?> issue_good_category;
+
+    @FXML
+    private ComboBox<?> issue_good_name;
+
+    @FXML
+    private Spinner<?> issue_good_quantity;
+    @FXML
+    private TextField amount;
+
+    @FXML
+    private Label balance;
     Alert alert;
 
     // IMPORTING SQL TOOLS
@@ -240,7 +272,7 @@ public class DashboardController implements Initializable {
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information Message");
                 alert.setHeaderText(null);
-                alert.setContentText("New Created Successfully");
+                alert.setContentText("New Product Created Successfully");
                 alert.showAndWait();
                 // CLEAR THE PRODUCT FORM
                 clearform();
@@ -251,6 +283,43 @@ public class DashboardController implements Initializable {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void deleteProduct(){
+        connect = Database.connect();
+        try {
+
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation  Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to delete Product with ID:" + product_id.getText()+ "?");
+            Optional<ButtonType> option = alert.showAndWait();
+
+            if(option.get().equals(ButtonType.OK)){
+                String deleteData = "DELETE FROM product WHERE product_id = "+ product_id.getText();
+                prepare = connect.prepareStatement(deleteData);
+                prepare.executeUpdate();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Product Deleted Successfully");
+                alert.showAndWait();
+
+                // TO UPDATE THE TABLE VIEW
+                showAllProducts();
+                // TO CLEAR THE PRODUCT FORM
+                clearform();
+            }else{
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Action Cancelled..");
+                alert.showAndWait();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     // METHOD TO CLEAR THE PRODUCT FORM
@@ -307,6 +376,8 @@ public class DashboardController implements Initializable {
         product_name.setText(String.valueOf(product.getProduct_name()));
         product_price.setText(String.valueOf(product.getPrice()));
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
