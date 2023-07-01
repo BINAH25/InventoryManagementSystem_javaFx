@@ -140,12 +140,15 @@ public class DashboardController implements Initializable {
     private ComboBox<?> issue_good_name;
 
     @FXML
-    private Spinner<?> issue_good_quantity;
+    private Spinner<Integer> issue_good_quantity;
     @FXML
     private TextField amount;
 
     @FXML
     private Label balance;
+    @FXML
+
+    private Button order_add_btn;
     Alert alert;
 
     // IMPORTING SQL TOOLS
@@ -221,6 +224,7 @@ public class DashboardController implements Initializable {
             showAllIssuedGoods();
             orderCategoryList();
             orderProductNameList();
+            getSpinner();
 
         } else if (event.getSource() == home_btn1) {
             main_form.setVisible(true);
@@ -240,6 +244,7 @@ public class DashboardController implements Initializable {
             showAllIssuedGoods();
             orderCategoryList();
             orderProductNameList();
+            getSpinner();
 
         } else if (event.getSource() == home_btn11) {
             main_form.setVisible(true);
@@ -259,6 +264,7 @@ public class DashboardController implements Initializable {
             showAllIssuedGoods();
             orderCategoryList();
             orderProductNameList();
+            getSpinner();
 
         }
     }
@@ -489,7 +495,7 @@ public class DashboardController implements Initializable {
         tableView2.setItems(issuedGoodsDataList);
     }
 
-
+// GET PRODUCTS DEPENDING ON THE CATEGORY SELECTED
     public void orderProductNameList(){
         String sql = "SELECT * FROM product WHERE category = '" + issue_good_category.getSelectionModel().getSelectedItem()+"'";
         connect = Database.connect();
@@ -508,6 +514,70 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    private SpinnerValueFactory<Integer> spinner;
+    public void getSpinner(){
+        spinner = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,10,0);
+        issue_good_quantity.setValueFactory(spinner);
+    }
+    int qty;
+    public void orderSpinner(){
+        qty = issue_good_quantity.getValue();
+    }
+
+    //
+    public void AddOrder(){
+        customerId();
+        String sql  = "INSERT INTO customer (customer_id,type,product_name,quantity,price,date) VALUES (?,?,?,?,?,?)";
+        connect = Database.connect();
+        try {
+            String checkData = "SELECT * FROM product WHERE product_name = '"
+                    +issue_good_name.getSelectionModel().getSelectedItem() +"'";
+
+            double price = 0;
+
+            statement = connect.createStatement();
+            result = statement.executeQuery(checkData);
+
+            if(result.next()){
+                price = result.getDouble("price");
+
+            }
+            double total = (price * qty);
+            if(
+                    issue_good_category.getSelectionModel().getSelectedItem() == null
+                    || issue_good_name.getSelectionModel().getSelectedItem() == null
+                    || total == 0
+            ){
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please fill all blank fields");
+                alert.showAndWait();
+            }else{
+                prepare = connect.prepareStatement(sql);
+                prepare.setString(1,String.valueOf(customer_id));
+                prepare.setString(2,(String) issue_good_category.getSelectionModel().getSelectedItem());
+                prepare.setString(3,(String) issue_good_name.getSelectionModel().getSelectedItem());
+                prepare.setString(4,String.valueOf(qty));
+                prepare.setString(5,String.valueOf(total));
+
+                Date date = new Date();
+                java.sql.Date  sqldate = new java.sql.Date(date.getTime());
+                prepare.setString(6,String.valueOf(sqldate));
+                prepare.executeUpdate();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Good Issued Successfully");
+                alert.showAndWait();
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         productCategoryList();
@@ -515,5 +585,6 @@ public class DashboardController implements Initializable {
         showAllIssuedGoods();
         orderCategoryList();
         orderProductNameList();
+        getSpinner();
     }
 }

@@ -381,23 +381,24 @@
                                     <Label layoutX="33.0" layoutY="124.0" prefHeight="35.0" prefWidth="230.0" text="GOOD NAME" />
                                     <ComboBox fx:id="issue_good_category" layoutX="32.0" layoutY="76.0" onAction="#orderCategoryList" prefHeight="35.0" prefWidth="230.0" promptText="select category" />
                                     <Label layoutX="35.0" layoutY="231.0" prefHeight="35.0" prefWidth="71.0" text="Quantity:" />
-                                    <Label layoutX="50.0" layoutY="282.0" prefHeight="35.0" prefWidth="71.0" text="Total:" />
-                                    <Label fx:id="total" layoutX="131.0" layoutY="280.0" prefHeight="35.0" prefWidth="100.0" text="\$0.0">
+                                    <Label layoutX="29.0" layoutY="312.0" prefHeight="35.0" prefWidth="71.0" text="Total:" />
+                                    <Label fx:id="total" layoutX="131.0" layoutY="310.0" prefHeight="35.0" prefWidth="100.0" text="\$0.0">
                                        <font>
                                           <Font name="Arial Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Spinner fx:id="issue_good_quantity" layoutX="130.0" layoutY="230.0" prefHeight="35.0" prefWidth="137.0" />
-                                    <Label layoutX="32.0" layoutY="333.0" prefHeight="35.0" prefWidth="71.0" text="Amount:" />
-                                    <TextField fx:id="amount" layoutX="130.0" layoutY="334.0" prefHeight="35.0" prefWidth="137.0" />
-                                    <Label layoutX="29.0" layoutY="385.0" prefHeight="35.0" prefWidth="71.0" text="Balance:" />
-                                    <Label fx:id="balance" layoutX="141.0" layoutY="384.0" prefHeight="35.0" prefWidth="100.0" text="\$0.0">
+                                    <Spinner fx:id="issue_good_quantity" layoutX="130.0" layoutY="230.0" onContextMenuRequested="#orderSpinner" prefHeight="35.0" prefWidth="137.0" />
+                                    <Label layoutX="32.0" layoutY="363.0" prefHeight="35.0" prefWidth="71.0" text="Amount:" />
+                                    <TextField fx:id="amount" layoutX="130.0" layoutY="364.0" prefHeight="35.0" prefWidth="137.0" />
+                                    <Label layoutX="29.0" layoutY="415.0" prefHeight="35.0" prefWidth="71.0" text="Balance:" />
+                                    <Label fx:id="balance" layoutX="141.0" layoutY="414.0" prefHeight="35.0" prefWidth="100.0" text="\$0.0">
                                        <font>
                                           <Font name="Arial Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="pay_btn" layoutX="23.0" layoutY="447.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="nav" stylesheets="@dashboard.css" text="Pay" textFill="WHITE" />
-                                    <Button fx:id="receipt_btn" layoutX="181.0" layoutY="447.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="add-btn" stylesheets="@dashboard.css" text="Receipt" />
+                                    <Button fx:id="pay_btn" layoutX="23.0" layoutY="477.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="nav" stylesheets="@dashboard.css" text="Pay" textFill="WHITE" />
+                                    <Button fx:id="receipt_btn" layoutX="181.0" layoutY="477.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="add-btn" stylesheets="@dashboard.css" text="Receipt" />
+                                    <Button fx:id="order_add_btn" layoutX="188.0" layoutY="279.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="nav" stylesheets="@dashboard.css" text="Add" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                            </children>
