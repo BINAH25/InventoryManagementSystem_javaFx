@@ -376,10 +376,10 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <Label layoutX="32.0" layoutY="38.0" prefHeight="35.0" prefWidth="230.0" text="GOOD NAME" />
-                                    <ComboBox fx:id="issue_good_name" layoutX="32.0" layoutY="85.0" prefHeight="35.0" prefWidth="230.0" promptText="choose name.." />
-                                    <Label layoutX="33.0" layoutY="124.0" prefHeight="35.0" prefWidth="230.0" text="GOOD CATEGORY" />
-                                    <ComboBox fx:id="issue_good_category" layoutX="33.0" layoutY="171.0" prefHeight="35.0" prefWidth="230.0" promptText="select category" />
+                                    <Label layoutX="32.0" layoutY="38.0" prefHeight="35.0" prefWidth="230.0" text="GOOD CATEGORY" />
+                                    <ComboBox fx:id="issue_good_name" layoutX="37.0" layoutY="166.0" onAction="#orderProductNameList" prefHeight="35.0" prefWidth="230.0" promptText="choose name.." />
+                                    <Label layoutX="33.0" layoutY="124.0" prefHeight="35.0" prefWidth="230.0" text="GOOD NAME" />
+                                    <ComboBox fx:id="issue_good_category" layoutX="32.0" layoutY="76.0" onAction="#orderCategoryList" prefHeight="35.0" prefWidth="230.0" promptText="select category" />
                                     <Label layoutX="35.0" layoutY="231.0" prefHeight="35.0" prefWidth="71.0" text="Quantity:" />
                                     <Label layoutX="50.0" layoutY="282.0" prefHeight="35.0" prefWidth="71.0" text="Total:" />
                                     <Label fx:id="total" layoutX="131.0" layoutY="280.0" prefHeight="35.0" prefWidth="100.0" text="\$0.0">

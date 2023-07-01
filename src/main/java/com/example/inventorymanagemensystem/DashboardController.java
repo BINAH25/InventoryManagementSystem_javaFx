@@ -113,7 +113,7 @@ public class DashboardController implements Initializable {
     @FXML
     private TableView<Product> tableView1;
     @FXML
-    private TableView<?> tableView2;
+    private TableView<CustomerData> tableView2;
 
     @FXML
     private Label total;
@@ -177,6 +177,30 @@ public class DashboardController implements Initializable {
         ObservableList listData = FXCollections.observableArrayList(CategoryList);
         category.setItems(listData);
     }
+    private String[] orderCategoryList = {
+            "Beverages",
+            "Bread/Bakery",
+            "Canned/Jarred Goods",
+            "Dairy Products",
+            "Dry/Baking Goods",
+            "Frozen Products",
+            "Meat",
+            "Farm Produce",
+            "Home Cleaners",
+            "Paper Goods",
+            "Home Care"
+    };
+    // METHOD TO FILL THE COMBO WITH CATEGORY LIST
+    public  void orderCategoryList(){
+
+        List<String> CategoryList = new ArrayList<>();
+        for(String data:orderCategoryList ){
+            CategoryList.add(data);
+        }
+        ObservableList listData = FXCollections.observableArrayList(CategoryList);
+        issue_good_category.setItems(listData);
+        orderProductNameList();
+    }
 // SWITCH FORM METHOD
     public void SwitchForm(ActionEvent event){
         if(event.getSource() == home_btn){
@@ -188,11 +212,16 @@ public class DashboardController implements Initializable {
             product_fom.setVisible(true);
             order_form.setVisible(false);
             showAllProducts();
+            productCategoryList();
 
         } else if (event.getSource() == order_btn) {
             main_form.setVisible(false);
             product_fom.setVisible(false);
             order_form.setVisible(true);
+            showAllIssuedGoods();
+            orderCategoryList();
+            orderProductNameList();
+
         } else if (event.getSource() == home_btn1) {
             main_form.setVisible(true);
             product_fom.setVisible(false);
@@ -202,11 +231,16 @@ public class DashboardController implements Initializable {
             product_fom.setVisible(true);
             order_form.setVisible(false);
             showAllProducts();
+            productCategoryList();
 
         } else if (event.getSource()== order_btn1) {
             main_form.setVisible(false);
             product_fom.setVisible(false);
             order_form.setVisible(true);
+            showAllIssuedGoods();
+            orderCategoryList();
+            orderProductNameList();
+
         } else if (event.getSource() == home_btn11) {
             main_form.setVisible(true);
             product_fom.setVisible(false);
@@ -216,11 +250,16 @@ public class DashboardController implements Initializable {
             product_fom.setVisible(true);
             order_form.setVisible(false);
             showAllProducts();
+            productCategoryList();
 
         } else if (event.getSource() == order_btn11) {
             main_form.setVisible(false);
             product_fom.setVisible(false);
             order_form.setVisible(true);
+            showAllIssuedGoods();
+            orderCategoryList();
+            orderProductNameList();
+
         }
     }
 // LOGOUT METHOD
@@ -403,7 +442,8 @@ public class DashboardController implements Initializable {
         }
         return listData;
     }
-    // CHECK CUSTOMER ID METHOD 
+
+    // CHECK CUSTOMER ID METHOD
 
     private  int customer_id;
 
@@ -437,10 +477,43 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
+// DISPLAY ALL ISSUED GOODS
+    private ObservableList<CustomerData> issuedGoodsDataList;
 
+    public void showAllIssuedGoods (){
+        issuedGoodsDataList = issueDataList();
+        order_col_name.setCellValueFactory(new PropertyValueFactory<>("goodName"));
+        order_col_category.setCellValueFactory(new PropertyValueFactory<>("goodCategory"));
+        order_col_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        order_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        tableView2.setItems(issuedGoodsDataList);
+    }
+
+
+    public void orderProductNameList(){
+        String sql = "SELECT * FROM product WHERE category = '" + issue_good_category.getSelectionModel().getSelectedItem()+"'";
+        connect = Database.connect();
+        try {
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            ObservableList listData = FXCollections.observableArrayList();
+
+            while (result.next()){
+                listData.add(result.getString("product_name"));
+            }
+            issue_good_name.setItems(listData);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         productCategoryList();
         showAllProducts();
+        showAllIssuedGoods();
+        orderCategoryList();
+        orderProductNameList();
     }
 }
