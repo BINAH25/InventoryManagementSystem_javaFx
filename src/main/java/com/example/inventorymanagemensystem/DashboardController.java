@@ -488,8 +488,8 @@ public class DashboardController implements Initializable {
 
     public void showAllIssuedGoods (){
         issuedGoodsDataList = issueDataList();
-        order_col_name.setCellValueFactory(new PropertyValueFactory<>("goodName"));
-        order_col_category.setCellValueFactory(new PropertyValueFactory<>("goodCategory"));
+        order_col_name.setCellValueFactory(new PropertyValueFactory<>("goodCategory"));
+        order_col_category.setCellValueFactory(new PropertyValueFactory<>("goodName"));
         order_col_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         order_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
         tableView2.setItems(issuedGoodsDataList);
@@ -514,18 +514,21 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
+    // METHOD TO GET THE SPINNER VALUE
 
     private SpinnerValueFactory<Integer> spinner;
     public void getSpinner(){
         spinner = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,10,0);
         issue_good_quantity.setValueFactory(spinner);
     }
+    // METHOD TO SET THE SPINNER VALUE
+
     int qty;
     public void orderSpinner(){
         qty = issue_good_quantity.getValue();
     }
 
-    //
+    // METHOD TO ADD ISSUE PRODUCTS OR GOODS
     public void AddOrder(){
         customerId();
         String sql  = "INSERT INTO customer (customer_id,type,product_name,quantity,price,date) VALUES (?,?,?,?,?,?)";
@@ -547,7 +550,6 @@ public class DashboardController implements Initializable {
             if(
                     issue_good_category.getSelectionModel().getSelectedItem() == null
                     || issue_good_name.getSelectionModel().getSelectedItem() == null
-                    || total == 0
             ){
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
@@ -581,6 +583,8 @@ public class DashboardController implements Initializable {
         }
     }
 
+    // METHOD TO DISPLAY TOTAL PRICE
+
     private double total_price;
     public void diaplayTotalPrice(){
         customerId();
@@ -593,7 +597,7 @@ public class DashboardController implements Initializable {
             while (result.next()){
                 total_price = result.getDouble("SUM(price)");
             }
-            total.setText(String.valueOf(total_price));
+            total.setText("$"+String.valueOf(total_price));
 
         }catch (Exception e){
             e.printStackTrace();
