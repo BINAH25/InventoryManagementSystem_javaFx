@@ -551,6 +551,7 @@ public class DashboardController implements Initializable {
             if(
                     issue_good_category.getSelectionModel().getSelectedItem() == null
                     || issue_good_name.getSelectionModel().getSelectedItem() == null
+                    || total == 0
             ){
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
@@ -607,27 +608,33 @@ public class DashboardController implements Initializable {
     //
     public void payOrder(){
         customerId();
-        String sql = "INSERT INTO customer_receipt (customer_id,total, date) VALUES (?,?,?)";
+        String sql = "INSERT INTO customer_receipt (customer_id,total,amount,balance, date) VALUES (?,?,?,?,?)";
         try {
             connect = Database.connect();
-            if(total_price > 0){
+            if(total_price > 0 && amount_price >= total_price){
                 prepare = connect.prepareStatement(sql);
                 prepare.setString(1,String.valueOf(customer_id));
                 prepare.setString(2,String.valueOf(total_price));
-
+                prepare.setString(3,String.valueOf(amount_price));
+                prepare.setString(4,String.valueOf(balance_price));
                 Date date = new Date();
                 java.sql.Date sqldate = new java.sql.Date(date.getTime());
-                prepare.setString(3,String.valueOf(sqldate));
+                prepare.setString(5,String.valueOf(sqldate));
+                prepare.executeUpdate();
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information Message");
                 alert.setHeaderText(null);
                 alert.setContentText("Good Payment made Successfully");
                 alert.showAndWait();
+                amount.setText("");
+                balance.setText("");
+                showAllIssuedGoods();
+
             }else{
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Message");
                 alert.setHeaderText(null);
-                alert.setContentText("Unknown Error occurred");
+                alert.setContentText("Invalid Amount or Total price");
                 alert.showAndWait();
 
             }
@@ -635,6 +642,33 @@ public class DashboardController implements Initializable {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private double balance_price;
+    private  double amount_price;
+    public void orderAmount(){
+        amount_price = Double.parseDouble(amount.getText());
+        if(total_price > 0){
+            if(amount_price >= total_price){
+                balance_price = (amount_price - total_price);
+                balance.setText("$"+ String.valueOf(balance_price));
+            }else{
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Amount is less than total price");
+                alert.showAndWait();
+                amount.setText("");
+            }
+        }else{
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Total price is less than zero");
+            alert.showAndWait();
+            amount.setText("");
+        }
+
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

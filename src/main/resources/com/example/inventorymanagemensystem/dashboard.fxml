@@ -389,7 +389,7 @@
                                     </Label>
                                     <Spinner fx:id="issue_good_quantity" layoutX="130.0" layoutY="230.0" onMouseClicked="#orderSpinner" prefHeight="35.0" prefWidth="137.0" />
                                     <Label layoutX="32.0" layoutY="363.0" prefHeight="35.0" prefWidth="71.0" text="Amount:" />
-                                    <TextField fx:id="amount" layoutX="130.0" layoutY="364.0" prefHeight="35.0" prefWidth="137.0" />
+                                    <TextField fx:id="amount" layoutX="130.0" layoutY="364.0" onAction="#orderAmount" prefHeight="35.0" prefWidth="137.0" />
                                     <Label layoutX="29.0" layoutY="415.0" prefHeight="35.0" prefWidth="71.0" text="Balance:" />
                                     <Label fx:id="balance" layoutX="141.0" layoutY="414.0" prefHeight="35.0" prefWidth="100.0" text="\$0.0">
                                        <font>
