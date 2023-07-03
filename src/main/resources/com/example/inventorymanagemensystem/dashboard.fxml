@@ -396,7 +396,7 @@
                                           <Font name="Arial Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="pay_btn" layoutX="23.0" layoutY="477.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="nav" stylesheets="@dashboard.css" text="Pay" textFill="WHITE" />
+                                    <Button fx:id="pay_btn" layoutX="23.0" layoutY="477.0" mnemonicParsing="false" onAction="#payOrder" prefHeight="40.0" prefWidth="80.0" styleClass="nav" stylesheets="@dashboard.css" text="Pay" textFill="WHITE" />
                                     <Button fx:id="receipt_btn" layoutX="181.0" layoutY="477.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="add-btn" stylesheets="@dashboard.css" text="Receipt" />
                                     <Button fx:id="order_add_btn" layoutX="188.0" layoutY="279.0" mnemonicParsing="false" onAction="#AddOrder" prefHeight="40.0" prefWidth="80.0" styleClass="nav" stylesheets="@dashboard.css" text="Add" textFill="WHITE" />
                                  </children>

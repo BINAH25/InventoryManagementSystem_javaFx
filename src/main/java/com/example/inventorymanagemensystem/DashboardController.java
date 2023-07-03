@@ -493,6 +493,7 @@ public class DashboardController implements Initializable {
         order_col_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         order_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
         tableView2.setItems(issuedGoodsDataList);
+        diaplayTotalPrice();
     }
 
 // GET PRODUCTS DEPENDING ON THE CATEGORY SELECTED
@@ -598,6 +599,38 @@ public class DashboardController implements Initializable {
                 total_price = result.getDouble("SUM(price)");
             }
             total.setText("$"+String.valueOf(total_price));
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    //
+    public void payOrder(){
+        customerId();
+        String sql = "INSERT INTO customer_receipt (customer_id,total, date) VALUES (?,?,?)";
+        try {
+            connect = Database.connect();
+            if(total_price > 0){
+                prepare = connect.prepareStatement(sql);
+                prepare.setString(1,String.valueOf(customer_id));
+                prepare.setString(2,String.valueOf(total_price));
+
+                Date date = new Date();
+                java.sql.Date sqldate = new java.sql.Date(date.getTime());
+                prepare.setString(3,String.valueOf(sqldate));
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Good Payment made Successfully");
+                alert.showAndWait();
+            }else{
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Unknown Error occurred");
+                alert.showAndWait();
+
+            }
 
         }catch (Exception e){
             e.printStackTrace();
