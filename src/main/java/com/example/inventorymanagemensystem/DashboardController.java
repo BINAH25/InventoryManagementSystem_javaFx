@@ -693,7 +693,7 @@ public class DashboardController implements Initializable {
 
                 if(option.get().equals(ButtonType.OK)){
                     statement = connect.createStatement();
-                    statement.executeQuery(sql);
+                    statement.executeUpdate(sql);
                     showAllIssuedGoods();
                     amount_price = 0;
                     balance_price = 0;
