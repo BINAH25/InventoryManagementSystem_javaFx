@@ -607,7 +607,7 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
-    //
+    // THIS METHOD RECORD THE CUSTOMER ID AND TOTAL AND BALANCE
     public void payOrder(){
         customerId();
         String sql = "INSERT INTO customer_receipt (customer_id,total,amount,balance, date) VALUES (?,?,?,?,?)";
@@ -645,7 +645,7 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
-
+// THIS METHOD TAKE THE AMOUNT AND CALCULATE THE BALANCE FROM THE TOTAL
     private double balance_price;
     private  double amount_price;
     public void orderAmount(){
@@ -672,7 +672,7 @@ public class DashboardController implements Initializable {
         }
 
     }
-    //
+    // THIS METHOD CLEAR THE ISSUED GOODS
     public void orederReset(){
         String sql = "DELETE FROM customer WHERE customer_id = '"+ customer_id+"'";
         try {
