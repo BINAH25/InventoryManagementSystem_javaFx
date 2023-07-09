@@ -179,7 +179,8 @@ public class DashboardController implements Initializable {
     private Button order_btn12;
     @FXML
     private Button remove_vendor;
-
+    @FXML
+    private TextField vendor_name;
     Alert alert;
 
     // IMPORTING SQL TOOLS
@@ -803,6 +804,35 @@ public class DashboardController implements Initializable {
                     alert.setHeaderText(null);
                     alert.setContentText("Action cancelled");
                 }
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void addVendor(){
+        String sql = "INSERT INTO vendor (vendor_name) VALUES (?)";
+        try {
+            if(vendor_name.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Please fill all blank fields");
+                alert.showAndWait();
+            }else {
+                connect = Database.connect();
+                prepare = connect.prepareStatement(sql);
+                prepare.setString(1,vendor_name.getText());
+                prepare.executeUpdate();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("New Vendor Created Successfully");
+                alert.showAndWait();
+                // CLEAR THE PRODUCT FORM
+                vendor_name.setText("");
+                // SHOW THE PRODUCT ADDED IN THE TABLEVIEW
 
             }
         }catch (Exception e){

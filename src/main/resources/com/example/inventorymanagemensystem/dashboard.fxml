@@ -21,7 +21,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventorymanagemensystem.DashboardController">
    <children>
-      <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0" visible="false">
          <children>
             <BorderPane layoutX="237.0" layoutY="152.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -425,7 +425,7 @@
             </BorderPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="add_vendor_form" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+      <AnchorPane fx:id="add_vendor_form" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane layoutX="237.0" layoutY="152.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -494,13 +494,13 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <Label layoutX="14.0" layoutY="110.0" prefHeight="34.0" prefWidth="222.0" text="VENDOR NAME">
+                                    <Label layoutX="14.0" layoutY="120.0" prefHeight="34.0" prefWidth="222.0" text="VENDOR NAME">
                                        <font>
                                           <Font name="Arial Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="vendor_name" layoutX="15.0" layoutY="164.0" prefHeight="35.0" prefWidth="230.0" promptText="Enter Good name" text="Enter vendor name" />
-                                    <Button fx:id="add_vendor" layoutX="15.0" layoutY="243.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="40.0" prefWidth="230.0" styleClass="nav" stylesheets="@dashboard.css" text="ADD VENDOR" textFill="WHITE" />
+                                    <TextField fx:id="vendor_name" layoutX="15.0" layoutY="164.0" prefHeight="35.0" prefWidth="230.0" promptText="Enter vendor name" />
+                                    <Button fx:id="add_vendor" layoutX="15.0" layoutY="243.0" mnemonicParsing="false" onAction="#addVendor" prefHeight="40.0" prefWidth="230.0" styleClass="nav" stylesheets="@dashboard.css" text="ADD VENDOR" textFill="WHITE" />
                                     <Button fx:id="remove_vendor" layoutX="16.0" layoutY="316.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="40.0" prefWidth="230.0" styleClass="nav" stylesheets="@dashboard.css" text="REMOVE VENDOR" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
