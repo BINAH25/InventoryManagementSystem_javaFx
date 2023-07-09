@@ -174,6 +174,8 @@ public class DashboardController implements Initializable {
     @FXML
     private TableColumn<?, ?> column_vendor_name;
     @FXML
+    private TableColumn<?, ?>column_vendor_id;
+    @FXML
     private Button home_btn12;
     @FXML
     private Button order_btn12;
@@ -181,6 +183,8 @@ public class DashboardController implements Initializable {
     private Button remove_vendor;
     @FXML
     private TextField vendor_name;
+    @FXML
+    private TextField vendor_id;
     Alert alert;
 
     // IMPORTING SQL TOOLS
@@ -852,7 +856,8 @@ public class DashboardController implements Initializable {
             VendorData vendor;
             while (result.next()){
                 vendor = new VendorData(
-                        result.getString("vendor_name")
+                        result.getString("vendor_name"),
+                        result.getInt("vendor_id")
                 );
                 listVendors.add(vendor);
             }
@@ -865,6 +870,7 @@ public class DashboardController implements Initializable {
     private ObservableList<VendorData> VendortLists;
     public void showAllVendors(){
         VendortLists = GetAllVendors();
+        column_vendor_id.setCellValueFactory(new PropertyValueFactory<>("vendor_id"));
         column_vendor_name.setCellValueFactory(new PropertyValueFactory<>("vendor_name"));
 
         vendor_tableView.setItems(VendortLists);
@@ -875,6 +881,7 @@ public class DashboardController implements Initializable {
         int num = vendor_tableView.getSelectionModel().getSelectedIndex();
 
         if((num - 1) < -1) return;
+        vendor_id.setText(String.valueOf(vendor.getVendor_id()));
         vendor_name.setText(String.valueOf(vendor.getVendor_name()));
 
     }
@@ -886,11 +893,11 @@ public class DashboardController implements Initializable {
             alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation  Message");
             alert.setHeaderText(null);
-            alert.setContentText("Are you sure you want to delete this Vendor with ID:" + vendor_name.getText()+ "?");
+            alert.setContentText("Are you sure you want to delete this Vendor" + vendor_id.getText()+ "?");
             Optional<ButtonType> option = alert.showAndWait();
 
             if(option.get().equals(ButtonType.OK)){
-                String deleteData = "DELETE FROM vendor WHERE vendor_name = "+ vendor_name.getText();
+                String deleteData = "DELETE FROM vendor WHERE vendor_id = "+ vendor_id.getText();
                 prepare = connect.prepareStatement(deleteData);
                 prepare.executeUpdate();
                 alert = new Alert(Alert.AlertType.INFORMATION);

@@ -494,7 +494,7 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <Label layoutX="14.0" layoutY="120.0" prefHeight="34.0" prefWidth="222.0" text="VENDOR NAME">
+                                    <Label layoutX="10.0" layoutY="21.0" prefHeight="34.0" prefWidth="222.0" text="VENDOR ID">
                                        <font>
                                           <Font name="Arial Bold" size="13.0" />
                                        </font>
@@ -502,6 +502,12 @@
                                     <TextField fx:id="vendor_name" layoutX="15.0" layoutY="164.0" prefHeight="35.0" prefWidth="230.0" promptText="Enter vendor name" />
                                     <Button fx:id="add_vendor" layoutX="15.0" layoutY="243.0" mnemonicParsing="false" onAction="#addVendor" prefHeight="40.0" prefWidth="230.0" styleClass="nav" stylesheets="@dashboard.css" text="ADD VENDOR" textFill="WHITE" />
                                     <Button fx:id="remove_vendor" layoutX="16.0" layoutY="316.0" mnemonicParsing="false" onAction="#deleteVendor" prefHeight="40.0" prefWidth="230.0" styleClass="nav" stylesheets="@dashboard.css" text="REMOVE VENDOR" textFill="WHITE" />
+                                    <Label layoutX="14.0" layoutY="114.0" prefHeight="34.0" prefWidth="222.0" text="VENDOR NAME">
+                                       <font>
+                                          <Font name="Arial Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="vendor_id" layoutX="10.0" layoutY="68.0" prefHeight="35.0" prefWidth="230.0" promptText="Enter vendor name" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="301.0" layoutY="6.0" prefHeight="543.0" prefWidth="590.0" stylesheets="@dashboard.css">
@@ -512,7 +518,8 @@
                                  <children>
                                     <TableView fx:id="vendor_tableView" layoutX="132.0" layoutY="70.0" onMouseClicked="#selectVendordata" prefHeight="459.0" prefWidth="370.0">
                                        <columns>
-                                          <TableColumn fx:id="column_vendor_name" prefWidth="368.0" text="VENDOR NAME" />
+                                          <TableColumn fx:id="column_vendor_id" prefWidth="195.0" text="VENDOR ID" />
+                                          <TableColumn fx:id="column_vendor_name" prefWidth="195.0" text="VENDOR NAME" />
                                        </columns>
                                     </TableView>
                                     <TextField fx:id="search1" layoutX="167.0" layoutY="14.0" prefHeight="34.0" prefWidth="257.0" promptText="Search" styleClass="search" stylesheets="@dashboard.css" />
