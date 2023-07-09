@@ -831,16 +831,17 @@ public class DashboardController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("New Vendor Created Successfully");
                 alert.showAndWait();
-                // CLEAR THE PRODUCT FORM
+                // CLEAR THE Vendor FORM
                 vendor_name.setText("");
-                // SHOW THE PRODUCT ADDED IN THE TABLEVIEW
+                // SHOW THE Vendor ADDED IN THE TABLEVIEW
+                showAllVendors();
 
             }
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-    //
+    // THIS METHOD GET ALL VENDORS
     public ObservableList<VendorData> GetAllVendors(){
         ObservableList<VendorData> listVendors = FXCollections.observableArrayList();
         String sql = "SELECT * FROM vendor";
@@ -860,6 +861,7 @@ public class DashboardController implements Initializable {
         }
         return  listVendors;
     }
+    // THIS METHOD SHOW ALL VENDORS
     private ObservableList<VendorData> VendortLists;
     public void showAllVendors(){
         VendortLists = GetAllVendors();
@@ -867,13 +869,50 @@ public class DashboardController implements Initializable {
 
         vendor_tableView.setItems(VendortLists);
     }
-    //  POPULATE THE PRODUCT FORM WITH SELECT PRODUCT
+    //  POPULATE THE VENDOR FORM WITH SELECT VENDOR
     public void selectVendordata(){
         VendorData vendor = vendor_tableView.getSelectionModel().getSelectedItem();
         int num = vendor_tableView.getSelectionModel().getSelectedIndex();
 
         if((num - 1) < -1) return;
         vendor_name.setText(String.valueOf(vendor.getVendor_name()));
+
+    }
+    // THIS METHOS DELETE THE VENDOR
+    public void deleteVendor(){
+        connect = Database.connect();
+        try {
+
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation  Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to delete this Vendor with ID:" + vendor_name.getText()+ "?");
+            Optional<ButtonType> option = alert.showAndWait();
+
+            if(option.get().equals(ButtonType.OK)){
+                String deleteData = "DELETE FROM vendor WHERE vendor_name = "+ vendor_name.getText();
+                prepare = connect.prepareStatement(deleteData);
+                prepare.executeUpdate();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Vendor Deleted Successfully");
+                alert.showAndWait();
+
+                // TO UPDATE THE TABLE VIEW
+                showAllVendors();
+                // TO CLEAR THE Vendor FORM
+                vendor_name.setText("");
+            }else{
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Action Cancelled..");
+                alert.showAndWait();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
     @Override

@@ -501,7 +501,7 @@
                                     </Label>
                                     <TextField fx:id="vendor_name" layoutX="15.0" layoutY="164.0" prefHeight="35.0" prefWidth="230.0" promptText="Enter vendor name" />
                                     <Button fx:id="add_vendor" layoutX="15.0" layoutY="243.0" mnemonicParsing="false" onAction="#addVendor" prefHeight="40.0" prefWidth="230.0" styleClass="nav" stylesheets="@dashboard.css" text="ADD VENDOR" textFill="WHITE" />
-                                    <Button fx:id="remove_vendor" layoutX="16.0" layoutY="316.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="40.0" prefWidth="230.0" styleClass="nav" stylesheets="@dashboard.css" text="REMOVE VENDOR" textFill="WHITE" />
+                                    <Button fx:id="remove_vendor" layoutX="16.0" layoutY="316.0" mnemonicParsing="false" onAction="#deleteVendor" prefHeight="40.0" prefWidth="230.0" styleClass="nav" stylesheets="@dashboard.css" text="REMOVE VENDOR" textFill="WHITE" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="301.0" layoutY="6.0" prefHeight="543.0" prefWidth="590.0" stylesheets="@dashboard.css">
