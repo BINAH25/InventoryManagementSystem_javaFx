@@ -5,13 +5,15 @@ import java.util.Date;
 public class Product {
     private Integer product_id;
     private String category;
+    private String vendor_name;
     private  String product_name;
     private  double price;
     private Date date;
 
-    public Product(Integer product_id,String category,String product_name,double price,Date date){
+    public Product(Integer product_id,String category,String vendor_name,String  product_name,double price,Date date){
         this.product_id = product_id;
         this.category = category;
+        this.vendor_name = vendor_name;
         this.product_name = product_name;
         this.price = price;
         this.date = date;

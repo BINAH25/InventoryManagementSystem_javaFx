@@ -51,6 +51,8 @@ public class DashboardController implements Initializable {
 
     @FXML
     private TableColumn<Product, String> column4;
+    @FXML
+    private TableColumn<Product, String> column5;
 
     @FXML
     private Button home_btn;
@@ -172,19 +174,20 @@ public class DashboardController implements Initializable {
     @FXML
     private AnchorPane add_vendor_form;
     @FXML
-    private TableColumn<?, ?> column_vendor_name;
+    private TableColumn<VendorData, String> column_vendor_name;
     @FXML
-    private TableColumn<?, ?>column_vendor_id;
+    private TableColumn<VendorData, String>column_vendor_id;
     @FXML
     private Button home_btn12;
     @FXML
     private Button order_btn12;
-    @FXML
-    private Button remove_vendor;
+
     @FXML
     private TextField vendor_name;
     @FXML
     private TextField vendor_id;
+    @FXML
+    private ComboBox<?> vendor;
     Alert alert;
 
     // IMPORTING SQL TOOLS
@@ -397,7 +400,7 @@ public class DashboardController implements Initializable {
 
     // ADD PRODUCT METHOD
     public void addProduct(){
-        String sql = "INSERT INTO product (product_id,category,product_name,price,date) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO product (product_id,category,vendor_name,product_name,price,date) VALUES (?,?,?,?,?,?)";
         try {
             if(product_id.getText().isEmpty()|| category.getSelectionModel().getSelectedItem() == null
                     || product_name.getText().isEmpty()||product_price.getText().isEmpty()) {
@@ -411,12 +414,13 @@ public class DashboardController implements Initializable {
                 prepare = connect.prepareStatement(sql);
                 prepare.setString(1,product_id.getText());
                 prepare.setString(2,(String) category.getSelectionModel().getSelectedItem());
-                prepare.setString(3,product_name.getText());
-                prepare.setString(4,product_price.getText());
+                prepare.setString(3,(String) vendor.getSelectionModel().getSelectedItem());
+                prepare.setString(4,product_name.getText());
+                prepare.setString(5,product_price.getText());
 
                 Date date  = new Date();
                 java.sql.Date sqldate = new java.sql.Date(date.getTime());
-                prepare.setString(5,String.valueOf(sqldate));
+                prepare.setString(6,String.valueOf(sqldate));
                 prepare.executeUpdate();
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information Message");
@@ -493,6 +497,7 @@ public class DashboardController implements Initializable {
                 products = new Product(
                         result.getInt("product_id"),
                         result.getString("category"),
+                        result.getString("vendor_name"),
                         result.getString("product_name"),
                         result.getDouble("price"),
                         result.getDate("date")
@@ -511,8 +516,9 @@ public class DashboardController implements Initializable {
         ProductLists = getAllProducts();
         column1.setCellValueFactory(new PropertyValueFactory<>("product_id"));
         column2.setCellValueFactory(new PropertyValueFactory<>("category"));
-        column3.setCellValueFactory(new PropertyValueFactory<>("product_name"));
-        column4.setCellValueFactory(new PropertyValueFactory<>("price"));
+        column3.setCellValueFactory(new PropertyValueFactory<>("vendor_name"));
+        column4.setCellValueFactory(new PropertyValueFactory<>("product_name"));
+        column5.setCellValueFactory(new PropertyValueFactory<>("price"));
         tableView1.setItems(ProductLists);
     }
 //  POPULATE THE PRODUCT FORM WITH SELECT PRODUCT
@@ -817,7 +823,7 @@ public class DashboardController implements Initializable {
     }
 // METHOD TO ADD VENDORS
     public void addVendor(){
-        String sql = "INSERT INTO vendor (vendor_name) VALUES (?)";
+        String sql = "INSERT INTO vendor (vendor_id,vendor_name) VALUES (?,?)";
         try {
             if(vendor_name.getText().isEmpty()) {
                 alert = new Alert(Alert.AlertType.ERROR);
@@ -828,7 +834,8 @@ public class DashboardController implements Initializable {
             }else {
                 connect = Database.connect();
                 prepare = connect.prepareStatement(sql);
-                prepare.setString(1,vendor_name.getText());
+                prepare.setString(1,vendor_id.getText());
+                prepare.setString(2,vendor_name.getText());
                 prepare.executeUpdate();
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information Message");
@@ -885,7 +892,7 @@ public class DashboardController implements Initializable {
         vendor_name.setText(String.valueOf(vendor.getVendor_name()));
 
     }
-    // THIS METHOS DELETE THE VENDOR
+    // THIS METHODS DELETE THE VENDOR
     public void deleteVendor(){
         connect = Database.connect();
         try {
@@ -922,6 +929,25 @@ public class DashboardController implements Initializable {
         }
 
     }
+// THIS METHOD GET LIST OF VENDOR
+    public void vendorsNameList(){
+        String sql = "SELECT * FROM vendor";
+        connect = Database.connect();
+        try {
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            ObservableList listData = FXCollections.observableArrayList();
+
+            while (result.next()){
+                listData.add(result.getString("vendor_name"));
+            }
+            vendor.setItems(listData);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         productCategoryList();
@@ -931,5 +957,6 @@ public class DashboardController implements Initializable {
         showAllVendors();
         orderProductNameList();
         getSpinner();
+        vendorsNameList();
     }
 }
