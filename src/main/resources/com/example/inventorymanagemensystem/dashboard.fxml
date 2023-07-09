@@ -183,7 +183,7 @@
             </BorderPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="product_fom" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="product_fom" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
          <children>
             <BorderPane layoutX="237.0" layoutY="152.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -313,7 +313,7 @@
             </BorderPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="order_form" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+      <AnchorPane fx:id="order_form" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane layoutX="237.0" layoutY="152.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -384,10 +384,11 @@
                                  <children>
                                     <TableView fx:id="tableView2" layoutX="8.0" layoutY="5.0" prefHeight="527.0" prefWidth="549.0">
                                        <columns>
-                                          <TableColumn fx:id="order_col_name" prefWidth="133.0" text="GOOD NAME" />
-                                          <TableColumn fx:id="order_col_category" prefWidth="158.0" text="CATEGORY" />
-                                          <TableColumn fx:id="order_col_quantity" prefWidth="128.0" text="QUANTITY" />
-                                          <TableColumn fx:id="order_col_price" prefWidth="129.0" text="PRICE" />
+                                          <TableColumn fx:id="order_col_name" prefWidth="110.0" text="GOOD NAME" />
+                                          <TableColumn fx:id="order_col_category" prefWidth="106.0" text="CATEGORY" />
+                                          <TableColumn fx:id="order_col_vendor" prefWidth="106.0" text="VENDOR" />
+                                          <TableColumn fx:id="order_col_quantity" prefWidth="106.0" text="CATEGORY" />
+                                          <TableColumn fx:id="order_col_price" prefWidth="116.0" text="PRICE" />
                                        </columns>
                                     </TableView>
                                  </children>
@@ -398,10 +399,10 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <Label layoutX="32.0" layoutY="38.0" prefHeight="35.0" prefWidth="230.0" text="GOOD CATEGORY" />
-                                    <ComboBox fx:id="issue_good_name" layoutX="37.0" layoutY="166.0" onAction="#orderProductNameList" prefHeight="35.0" prefWidth="230.0" promptText="choose name.." />
-                                    <Label layoutX="33.0" layoutY="124.0" prefHeight="35.0" prefWidth="230.0" text="GOOD NAME" />
-                                    <ComboBox fx:id="issue_good_category" layoutX="32.0" layoutY="76.0" onAction="#orderCategoryList" prefHeight="35.0" prefWidth="230.0" promptText="select category" />
+                                    <Label layoutX="32.0" layoutY="6.0" prefHeight="35.0" prefWidth="230.0" text="GOOD CATEGORY" />
+                                    <ComboBox fx:id="issue_good_name" layoutX="34.0" layoutY="118.0" onAction="#orderProductNameList" prefHeight="35.0" prefWidth="230.0" promptText="choose name.." />
+                                    <Label layoutX="33.0" layoutY="80.0" prefHeight="35.0" prefWidth="230.0" text="GOOD NAME" />
+                                    <ComboBox fx:id="issue_good_category" layoutX="32.0" layoutY="44.0" onAction="#orderCategoryList" prefHeight="35.0" prefWidth="230.0" promptText="select category" />
                                     <Label layoutX="35.0" layoutY="231.0" prefHeight="35.0" prefWidth="71.0" text="Quantity:" />
                                     <Label layoutX="29.0" layoutY="312.0" prefHeight="35.0" prefWidth="71.0" text="Total:" />
                                     <Label fx:id="total" layoutX="131.0" layoutY="310.0" prefHeight="35.0" prefWidth="100.0" text="\$0.0">
@@ -422,6 +423,8 @@
                                     <Button fx:id="receipt_btn" layoutX="208.0" layoutY="477.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="add-btn" stylesheets="@dashboard.css" text="Receipt" />
                                     <Button fx:id="order_add_btn" layoutX="188.0" layoutY="279.0" mnemonicParsing="false" onAction="#AddOrder" prefHeight="40.0" prefWidth="80.0" styleClass="nav" stylesheets="@dashboard.css" text="Add" textFill="WHITE" />
                                     <Button fx:id="reset_btn" layoutX="115.0" layoutY="477.0" mnemonicParsing="false" onAction="#orederReset" prefHeight="40.0" prefWidth="80.0" styleClass="add-btn" stylesheets="@dashboard.css" text="Reset" />
+                                    <ComboBox fx:id="issue_good_vendor" layoutX="35.0" layoutY="189.0" onAction="#orderProductNameList" prefHeight="35.0" prefWidth="230.0" promptText="choose vendor.." />
+                                    <Label layoutX="35.0" layoutY="154.0" prefHeight="35.0" prefWidth="230.0" text="GOOD VENDOR" />
                                  </children>
                               </AnchorPane>
                            </children>

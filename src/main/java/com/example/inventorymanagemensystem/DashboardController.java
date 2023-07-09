@@ -131,7 +131,9 @@ public class DashboardController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> order_col_name;
-
+    @FXML
+    private TableColumn<?, ?> order_col_vendor;
+    
     @FXML
     private TableColumn<?, ?> order_col_price;
 
@@ -142,7 +144,8 @@ public class DashboardController implements Initializable {
 
     @FXML
     private ComboBox<?> issue_good_name;
-
+    @FXML
+    private ComboBox<?> issue_good_vendor;
     @FXML
     private Spinner<Integer> issue_good_quantity;
     @FXML
@@ -550,6 +553,7 @@ public class DashboardController implements Initializable {
                         result.getDouble("price"),
                         result.getString("type"),
                         result.getString("product_name"),
+                        result.getString("vendor"),
                         result.getDate("date")
                 );
                 listData.add(customers);
@@ -601,6 +605,7 @@ public class DashboardController implements Initializable {
         issuedGoodsDataList = issueDataList();
         order_col_name.setCellValueFactory(new PropertyValueFactory<>("goodCategory"));
         order_col_category.setCellValueFactory(new PropertyValueFactory<>("goodName"));
+        order_col_vendor.setCellValueFactory(new PropertyValueFactory<>("vendor"));
         order_col_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         order_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
         tableView2.setItems(issuedGoodsDataList);

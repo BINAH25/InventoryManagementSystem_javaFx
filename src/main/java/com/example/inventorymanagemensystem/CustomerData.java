@@ -8,16 +8,18 @@ public class CustomerData {
     private double price;
     private String goodName;
     private  String goodCategory;
+    private String vendor;
     private Date date;
 
 
-    public CustomerData(Integer customerID,Integer quantity,double price,String goodName,String goodCategory,Date date){
+    public CustomerData(Integer customerID,Integer quantity,double price,String goodName,String goodCategory,String vendor,Date date){
         this.customerID = customerID;
         this.date = date;
         this.price = price;
         this.goodCategory = goodCategory;
         this.goodName = goodName;
         this.quantity = quantity;
+        this.vendor = vendor;
     }
 
 
@@ -44,5 +46,9 @@ public class CustomerData {
 
     public String getGoodCategory() {
         return goodCategory;
+    }
+
+    public String getVendor() {
+        return vendor;
     }
 }
