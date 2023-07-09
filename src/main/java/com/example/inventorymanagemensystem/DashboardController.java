@@ -151,6 +151,35 @@ public class DashboardController implements Initializable {
     @FXML
 
     private Button order_add_btn;
+    @FXML
+    private Button add_product_btn12;
+
+    @FXML
+    private Button add_vendoe_btn;
+
+    @FXML
+    private Button add_vendoe_btn1;
+
+    @FXML
+    private Button add_vendoe_btn11;
+
+    @FXML
+    private Button add_vendoe_btn12;
+
+    @FXML
+    private Button add_vendor;
+
+    @FXML
+    private AnchorPane add_vendor_form;
+    @FXML
+    private TableColumn<?, ?> column_vendor_name;
+    @FXML
+    private Button home_btn12;
+    @FXML
+    private Button order_btn12;
+    @FXML
+    private Button remove_vendor;
+
     Alert alert;
 
     // IMPORTING SQL TOOLS
@@ -212,10 +241,13 @@ public class DashboardController implements Initializable {
             main_form.setVisible(true);
             product_fom.setVisible(false);
             order_form.setVisible(false);
+            add_vendor_form.setVisible(false);
+
         } else if (event.getSource() == add_product_btn) {
             main_form.setVisible(false);
             product_fom.setVisible(true);
             order_form.setVisible(false);
+            add_vendor_form.setVisible(false);
             showAllProducts();
             productCategoryList();
 
@@ -223,19 +255,30 @@ public class DashboardController implements Initializable {
             main_form.setVisible(false);
             product_fom.setVisible(false);
             order_form.setVisible(true);
+            add_vendor_form.setVisible(false);
             showAllIssuedGoods();
             orderCategoryList();
             orderProductNameList();
             getSpinner();
 
-        } else if (event.getSource() == home_btn1) {
+        } else if(event.getSource()== add_vendoe_btn) {
+            main_form.setVisible(false);
+            product_fom.setVisible(false);
+            order_form.setVisible(false);
+            add_vendor_form.setVisible(true);
+
+        }else if (event.getSource() == home_btn1) {
             main_form.setVisible(true);
             product_fom.setVisible(false);
             order_form.setVisible(false);
+            add_vendor_form.setVisible(false);
+
         } else if (event.getSource() == add_product_btn1) {
             main_form.setVisible(false);
             product_fom.setVisible(true);
             order_form.setVisible(false);
+            add_vendor_form.setVisible(false);
+
             showAllProducts();
             productCategoryList();
 
@@ -243,31 +286,84 @@ public class DashboardController implements Initializable {
             main_form.setVisible(false);
             product_fom.setVisible(false);
             order_form.setVisible(true);
+            add_vendor_form.setVisible(false);
+
             showAllIssuedGoods();
             orderCategoryList();
             orderProductNameList();
             getSpinner();
+
+        } else if (event.getSource()== add_vendoe_btn1) {
+            main_form.setVisible(false);
+            product_fom.setVisible(false);
+            order_form.setVisible(false);
+            add_vendor_form.setVisible(true);
 
         } else if (event.getSource() == home_btn11) {
             main_form.setVisible(true);
             product_fom.setVisible(false);
             order_form.setVisible(false);
+            add_vendor_form.setVisible(false);
+
+
         } else if (event.getSource() == add_product_btn11) {
             main_form.setVisible(false);
             product_fom.setVisible(true);
             order_form.setVisible(false);
+            add_vendor_form.setVisible(false);
+
             showAllProducts();
             productCategoryList();
+
+        } else if (event.getSource()== add_vendoe_btn11) {
+            main_form.setVisible(false);
+            product_fom.setVisible(false);
+            order_form.setVisible(false);
+            add_vendor_form.setVisible(true);
 
         } else if (event.getSource() == order_btn11) {
             main_form.setVisible(false);
             product_fom.setVisible(false);
             order_form.setVisible(true);
+            add_vendor_form.setVisible(false);
+
             showAllIssuedGoods();
             orderCategoryList();
             orderProductNameList();
             getSpinner();
 
+        } else if (event.getSource()== home_btn12) {
+            main_form.setVisible(true);
+            product_fom.setVisible(false);
+            order_form.setVisible(false);
+            add_vendor_form.setVisible(false);
+
+
+        } else if (event.getSource()== add_product_btn12) {
+            main_form.setVisible(false);
+            product_fom.setVisible(true);
+            order_form.setVisible(false);
+            add_vendor_form.setVisible(false);
+
+            showAllProducts();
+            productCategoryList();
+
+        } else if (event.getSource()== order_btn12) {
+            main_form.setVisible(false);
+            product_fom.setVisible(false);
+            order_form.setVisible(true);
+            add_vendor_form.setVisible(false);
+
+            showAllIssuedGoods();
+            orderCategoryList();
+            orderProductNameList();
+            getSpinner();
+
+        } else if (event.getSource()== add_vendoe_btn12) {
+            main_form.setVisible(false);
+            product_fom.setVisible(false);
+            order_form.setVisible(false);
+            add_vendor_form.setVisible(true);
         }
     }
 // LOGOUT METHOD
@@ -385,17 +481,17 @@ public class DashboardController implements Initializable {
             connect = Database.connect();
             prepare = connect.prepareStatement(getProducts);
             result = prepare.executeQuery();
-            Product produts;
+            Product products;
 
             while (result.next()){
-                produts = new Product(
+                products = new Product(
                         result.getInt("product_id"),
                         result.getString("category"),
                         result.getString("product_name"),
                         result.getDouble("price"),
                         result.getDate("date")
                 );
-                productList.add(produts);
+                productList.add(products);
             }
 
         }catch (Exception e){

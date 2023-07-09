@@ -21,7 +21,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.inventorymanagemensystem.DashboardController">
    <children>
-      <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0" visible="false">
+      <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane layoutX="237.0" layoutY="152.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -67,6 +67,11 @@
                               <Button layoutX="8.0" layoutY="514.0" mnemonicParsing="false" onAction="#logout" prefHeight="41.0" prefWidth="117.0" styleClass="nav-btn" stylesheets="@dashboard.css" text="Logout">
                                  <graphic>
                                     <FontAwesomeIcon fx:id="logout_btn" fill="WHITE" glyphName="SIGN_OUT" size="2em" text="" />
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="add_vendoe_btn" layoutX="8.0" layoutY="336.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="34.0" prefWidth="171.0" styleClass="nav-btn" stylesheets="@dashboard.css" text="Add Vendor">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="1.5em" />
                                  </graphic>
                               </Button>
                            </children>
@@ -228,6 +233,11 @@
                               </Button>
                            </children>
                         </AnchorPane>
+                        <Button fx:id="add_vendoe_btn1" layoutX="9.0" layoutY="337.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="34.0" prefWidth="171.0" styleClass="nav-btn" stylesheets="@dashboard.css" text="Add Vendor">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="1.5em" />
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
                </left>
@@ -296,7 +306,7 @@
             </BorderPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="order_form" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="order_form" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
          <children>
             <BorderPane layoutX="237.0" layoutY="152.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -346,6 +356,11 @@
                               </Button>
                            </children>
                         </AnchorPane>
+                        <Button fx:id="add_vendoe_btn11" layoutX="9.0" layoutY="335.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="34.0" prefWidth="171.0" styleClass="nav-btn" stylesheets="@dashboard.css" text="Add Vendor">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="1.5em" />
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
                </left>
@@ -400,6 +415,108 @@
                                     <Button fx:id="receipt_btn" layoutX="208.0" layoutY="477.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" styleClass="add-btn" stylesheets="@dashboard.css" text="Receipt" />
                                     <Button fx:id="order_add_btn" layoutX="188.0" layoutY="279.0" mnemonicParsing="false" onAction="#AddOrder" prefHeight="40.0" prefWidth="80.0" styleClass="nav" stylesheets="@dashboard.css" text="Add" textFill="WHITE" />
                                     <Button fx:id="reset_btn" layoutX="115.0" layoutY="477.0" mnemonicParsing="false" onAction="#orederReset" prefHeight="40.0" prefWidth="80.0" styleClass="add-btn" stylesheets="@dashboard.css" text="Reset" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="add_vendor_form" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+         <children>
+            <BorderPane layoutX="237.0" layoutY="152.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="45.0" prefWidth="200.0" styleClass="semi-top-form" stylesheets="@dashboard.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="69.0" layoutY="-77.0" prefHeight="35.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <FontAwesomeIcon fill="#3a8647" glyphName="TRUCK" layoutX="488.0" layoutY="29.0" size="1.5em" text="" />
+                              <Label layoutX="519.0" layoutY="14.0" text="Inventory Management System" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </top>
+               <left>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutY="63.0" prefHeight="555.0" prefWidth="200.0" styleClass="nav" stylesheets="@dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <FontAwesomeIcon fill="#cde4d4" glyphName="USER" layoutX="49.0" layoutY="119.0" size="8em" />
+                              <Label layoutX="53.0" layoutY="134.0" text="Welcome Back" textFill="WHITE" />
+                              <Label fx:id="name12" alignment="CENTER" contentDisplay="CENTER" layoutX="44.0" layoutY="155.0" text="Louis Seyram" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="72.5" layoutX="107.0" layoutY="178.0" startX="-88.5" stroke="WHITE" strokeWidth="2.0" />
+                              <Button fx:id="home_btn12" layoutX="10.0" layoutY="202.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="34.0" prefWidth="171.0" styleClass="nav-btn" stylesheets="@dashboard.css" text="Home">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="HOME" size="1.5em" text="" />
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="add_product_btn12" layoutX="9.0" layoutY="251.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="34.0" prefWidth="171.0" styleClass="nav-btn" stylesheets="@dashboard.css" text="Add Product">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="1.5em" />
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="order_btn12" layoutX="7.0" layoutY="292.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="34.0" prefWidth="171.0" styleClass="nav-btn" stylesheets="@dashboard.css" text="Issue Goods">
+                                 <graphic>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="CUBE" size="1.5em" />
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="8.0" layoutY="514.0" mnemonicParsing="false" onAction="#logout" prefHeight="41.0" prefWidth="117.0" styleClass="nav-btn" stylesheets="@dashboard.css" text="Logout">
+                                 <graphic>
+                                    <FontAwesomeIcon fx:id="logout_btn12" fill="WHITE" glyphName="SIGN_OUT" size="2em" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <Button fx:id="add_vendoe_btn12" layoutX="9.0" layoutY="337.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="34.0" prefWidth="171.0" styleClass="nav-btn" stylesheets="@dashboard.css" text="Add Vendor">
+                           <graphic>
+                              <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="1.5em" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="98.0" layoutY="101.0" prefHeight="555.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="10.0" layoutY="6.0" prefHeight="543.0" prefWidth="272.0" stylesheets="@dashboard.css">
+                                 <styleClass>
+                                    <String fx:value="white-bg" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="110.0" prefHeight="34.0" prefWidth="222.0" text="VENDOR NAME">
+                                       <font>
+                                          <Font name="Arial Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="vendor_name" layoutX="15.0" layoutY="164.0" prefHeight="35.0" prefWidth="230.0" promptText="Enter Good name" text="Enter vendor name" />
+                                    <Button fx:id="add_vendor" layoutX="15.0" layoutY="243.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="40.0" prefWidth="230.0" styleClass="nav" stylesheets="@dashboard.css" text="ADD VENDOR" textFill="WHITE" />
+                                    <Button fx:id="remove_vendor" layoutX="16.0" layoutY="316.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="40.0" prefWidth="230.0" styleClass="nav" stylesheets="@dashboard.css" text="REMOVE VENDOR" textFill="WHITE" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="301.0" layoutY="6.0" prefHeight="543.0" prefWidth="590.0" stylesheets="@dashboard.css">
+                                 <styleClass>
+                                    <String fx:value="white-bg" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                                 <children>
+                                    <TableView fx:id="vendor_tableView" layoutX="132.0" layoutY="70.0" onMouseClicked="#selectStudentdata" prefHeight="459.0" prefWidth="370.0">
+                                       <columns>
+                                          <TableColumn fx:id="column_vendor_name" prefWidth="368.0" text="VENDOR NAME" />
+                                       </columns>
+                                    </TableView>
+                                    <TextField fx:id="search1" layoutX="167.0" layoutY="14.0" prefHeight="34.0" prefWidth="257.0" promptText="Search" styleClass="search" stylesheets="@dashboard.css" />
+                                    <FontAwesomeIcon glyphName="SEARCH" layoutX="174.0" layoutY="38.0" size="1.5em" />
                                  </children>
                               </AnchorPane>
                            </children>
