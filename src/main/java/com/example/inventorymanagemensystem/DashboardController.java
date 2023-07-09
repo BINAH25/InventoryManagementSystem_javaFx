@@ -167,7 +167,7 @@ public class DashboardController implements Initializable {
     private Button add_vendoe_btn12;
 
     @FXML
-    private Button add_vendor;
+    private TableView<VendorData> vendor_tableView;
 
     @FXML
     private AnchorPane add_vendor_form;
@@ -267,7 +267,7 @@ public class DashboardController implements Initializable {
             product_fom.setVisible(false);
             order_form.setVisible(false);
             add_vendor_form.setVisible(true);
-
+            showAllVendors();
         }else if (event.getSource() == home_btn1) {
             main_form.setVisible(true);
             product_fom.setVisible(false);
@@ -299,7 +299,7 @@ public class DashboardController implements Initializable {
             product_fom.setVisible(false);
             order_form.setVisible(false);
             add_vendor_form.setVisible(true);
-
+            showAllVendors();
         } else if (event.getSource() == home_btn11) {
             main_form.setVisible(true);
             product_fom.setVisible(false);
@@ -321,7 +321,7 @@ public class DashboardController implements Initializable {
             product_fom.setVisible(false);
             order_form.setVisible(false);
             add_vendor_form.setVisible(true);
-
+            showAllVendors();
         } else if (event.getSource() == order_btn11) {
             main_form.setVisible(false);
             product_fom.setVisible(false);
@@ -365,6 +365,7 @@ public class DashboardController implements Initializable {
             product_fom.setVisible(false);
             order_form.setVisible(false);
             add_vendor_form.setVisible(true);
+            showAllVendors();
         }
     }
 // LOGOUT METHOD
@@ -810,7 +811,7 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
-
+// METHOD TO ADD VENDORS
     public void addVendor(){
         String sql = "INSERT INTO vendor (vendor_name) VALUES (?)";
         try {
@@ -839,12 +840,49 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
+    //
+    public ObservableList<VendorData> GetAllVendors(){
+        ObservableList<VendorData> listVendors = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM vendor";
+        try {
+            connect = Database.connect();
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+            VendorData vendor;
+            while (result.next()){
+                vendor = new VendorData(
+                        result.getString("vendor_name")
+                );
+                listVendors.add(vendor);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  listVendors;
+    }
+    private ObservableList<VendorData> VendortLists;
+    public void showAllVendors(){
+        VendortLists = GetAllVendors();
+        column_vendor_name.setCellValueFactory(new PropertyValueFactory<>("vendor_name"));
+
+        vendor_tableView.setItems(VendortLists);
+    }
+    //  POPULATE THE PRODUCT FORM WITH SELECT PRODUCT
+    public void selectVendordata(){
+        VendorData vendor = vendor_tableView.getSelectionModel().getSelectedItem();
+        int num = vendor_tableView.getSelectionModel().getSelectedIndex();
+
+        if((num - 1) < -1) return;
+        vendor_name.setText(String.valueOf(vendor.getVendor_name()));
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         productCategoryList();
         showAllProducts();
         showAllIssuedGoods();
         orderCategoryList();
+        showAllVendors();
         orderProductNameList();
         getSpinner();
     }

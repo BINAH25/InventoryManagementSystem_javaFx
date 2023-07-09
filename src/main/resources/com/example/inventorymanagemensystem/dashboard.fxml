@@ -510,7 +510,7 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <TableView fx:id="vendor_tableView" layoutX="132.0" layoutY="70.0" onMouseClicked="#selectStudentdata" prefHeight="459.0" prefWidth="370.0">
+                                    <TableView fx:id="vendor_tableView" layoutX="132.0" layoutY="70.0" onMouseClicked="#selectVendordata" prefHeight="459.0" prefWidth="370.0">
                                        <columns>
                                           <TableColumn fx:id="column_vendor_name" prefWidth="368.0" text="VENDOR NAME" />
                                        </columns>
