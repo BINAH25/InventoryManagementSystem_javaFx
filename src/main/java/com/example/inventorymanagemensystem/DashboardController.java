@@ -41,7 +41,7 @@ public class DashboardController implements Initializable {
     private ComboBox<?> category;
 
     @FXML
-    private TableColumn<Product, Integer> column1;
+    private TableColumn<Product, String> column1;
 
     @FXML
     private TableColumn<Product, String> column2;
@@ -481,6 +481,7 @@ public class DashboardController implements Initializable {
         product_price.setText("");
         product_name.setText("");
         category.getSelectionModel().clearSelection();
+        vendor.getSelectionModel().clearSelection();
     }
 
     // GETTING ALL PRODUCTS FROM THE DATABASE

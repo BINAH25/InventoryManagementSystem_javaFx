@@ -10,7 +10,7 @@ public class Product {
     private  double price;
     private Date date;
 
-    public Product(Integer product_id,String category,String vendor_name,String  product_name,double price,Date date){
+    public Product(Integer product_id,String category,String vendor_name,String product_name,double price,Date date){
         this.product_id = product_id;
         this.category = category;
         this.vendor_name = vendor_name;
@@ -36,5 +36,9 @@ public class Product {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getVendor_name() {
+        return vendor_name;
     }
 }
