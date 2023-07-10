@@ -99,6 +99,7 @@ public class HelloController {
                     Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
+                    stage.setTitle("INVENTORY MANAGEMENT SYSTEM!");
                     stage.setScene(scene);
                     stage.show();
                 }else{

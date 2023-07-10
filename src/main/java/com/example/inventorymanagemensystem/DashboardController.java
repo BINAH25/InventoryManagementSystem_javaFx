@@ -133,7 +133,7 @@ public class DashboardController implements Initializable {
     private TableColumn<?, ?> order_col_name;
     @FXML
     private TableColumn<?, ?> order_col_vendor;
-    
+
     @FXML
     private TableColumn<?, ?> order_col_price;
 
@@ -518,7 +518,6 @@ public class DashboardController implements Initializable {
     private ObservableList<Product> ProductLists;
     public void showAllProducts(){
         ProductLists = getAllProducts();
-        column1.setCellValueFactory(new PropertyValueFactory<>("product_id"));
         column2.setCellValueFactory(new PropertyValueFactory<>("category"));
         column3.setCellValueFactory(new PropertyValueFactory<>("vendor_name"));
         column4.setCellValueFactory(new PropertyValueFactory<>("product_name"));
@@ -614,6 +613,7 @@ public class DashboardController implements Initializable {
 
 // GET PRODUCTS DEPENDING ON THE CATEGORY SELECTED
     public void orderProductNameList(){
+        orderVendorsNameList();
         String sql = "SELECT * FROM product WHERE category = '" + issue_good_category.getSelectionModel().getSelectedItem()+"'";
         connect = Database.connect();
         try {
@@ -954,6 +954,24 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
+    public void orderVendorsNameList(){
+        String sql = "SELECT * FROM product WHERE product_name = '" + issue_good_name.getSelectionModel().getSelectedItem()+"'";
+        connect = Database.connect();
+        try {
+            prepare = connect.prepareStatement(sql);
+            result = prepare.executeQuery();
+
+            ObservableList listData = FXCollections.observableArrayList();
+
+            while (result.next()){
+                listData.add(result.getString("vendor_name"));
+            }
+            issue_good_vendor.setItems(listData);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         productCategoryList();
@@ -964,5 +982,6 @@ public class DashboardController implements Initializable {
         orderProductNameList();
         getSpinner();
         vendorsNameList();
+        orderVendorsNameList();
     }
 }
