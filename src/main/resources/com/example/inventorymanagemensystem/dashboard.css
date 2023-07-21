@@ -10,7 +10,7 @@
 -fx-border-width: .2px .4px .4px .4px;
 }
 .nav{
--fx-background-color: linear-gradient(to bottom right,#16a47c,#2a827b);
+-fx-background-color: linear-gradient(to bottom right,#528df2,#243e6b);
 }
 .nav-btn{
 -fx-background-color: transparent;
@@ -45,17 +45,17 @@
 -fx-padding: 0px 0px 0px 28px;
 -fx-border-width: 1px;
 -fx-border-radius: 5px;
--fx-border-color: linear-gradient(to bottom right,#16a47c,#2a827b);
+-fx-border-color: linear-gradient(to bottom right,#528df2,#243e6b);
 }
 .table-view{
 -fx-background-color: transparent;
 -fx-padding: 0px;
--fx-border-color: linear-gradient(to bottom right,#16a47c,#2a827b);
+-fx-border-color: linear-gradient(to bottom right,#528df2,#243e6b);
 -fx-border-radius: 8px;
 -fx-border-width: 2px;
 }
 .table-view .column-header-background{
--fx-background-color: linear-gradient(to bottom right,#16a47c,#2a827b);
+-fx-background-color: linear-gradient(to bottom right,#528df2,#243e6b);
 -fx-background-radius: 8px 8px 0px 0px;
 }
 .table-view .column-header, .filter{

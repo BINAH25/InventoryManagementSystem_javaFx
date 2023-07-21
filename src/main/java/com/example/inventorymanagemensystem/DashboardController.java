@@ -1,4 +1,6 @@
 package com.example.inventorymanagemensystem;
+// ID 10899830
+
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -648,7 +650,7 @@ public class DashboardController implements Initializable {
     // METHOD TO ADD ISSUE PRODUCTS OR GOODS
     public void AddOrder(){
         customerId();
-        String sql  = "INSERT INTO customer (customer_id,type,product_name,quantity,price,date) VALUES (?,?,?,?,?,?)";
+        String sql  = "INSERT INTO customer (customer_id,type,vendor,product_name,quantity,price,date) VALUES (?,?,?,?,?,?,?)";
         connect = Database.connect();
         try {
             String checkData = "SELECT * FROM product WHERE product_name = '"
@@ -667,6 +669,7 @@ public class DashboardController implements Initializable {
             if(
                     issue_good_category.getSelectionModel().getSelectedItem() == null
                     || issue_good_name.getSelectionModel().getSelectedItem() == null
+                    || issue_good_vendor.getSelectionModel().getSelectedItem() == null
                     || total == 0
             ){
                 alert = new Alert(Alert.AlertType.ERROR);
@@ -678,13 +681,14 @@ public class DashboardController implements Initializable {
                 prepare = connect.prepareStatement(sql);
                 prepare.setString(1,String.valueOf(customer_id));
                 prepare.setString(2,(String) issue_good_category.getSelectionModel().getSelectedItem());
-                prepare.setString(3,(String) issue_good_name.getSelectionModel().getSelectedItem());
-                prepare.setString(4,String.valueOf(qty));
-                prepare.setString(5,String.valueOf(total));
+                prepare.setString(3,(String) issue_good_vendor.getSelectionModel().getSelectedItem());
+                prepare.setString(4,(String) issue_good_name.getSelectionModel().getSelectedItem());
+                prepare.setString(5,String.valueOf(qty));
+                prepare.setString(6,String.valueOf(total));
 
                 Date date = new Date();
                 java.sql.Date  sqldate = new java.sql.Date(date.getTime());
-                prepare.setString(6,String.valueOf(sqldate));
+                prepare.setString(7,String.valueOf(sqldate));
                 prepare.executeUpdate();
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information Message");
